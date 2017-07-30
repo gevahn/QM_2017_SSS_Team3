@@ -5,10 +5,10 @@ Performs a Hartree-Fock calculation on a given molecule.
 import numpy as np
 import os, sys
 sys.path.append(os.path.dirname(__file__))
+from dm import *
 from scf_utils import *
 sys.path.pop()
 from collections import deque
-
 
 def scf(ao_int, scf_params):
     """
@@ -104,8 +104,9 @@ def scf(ao_int, scf_params):
             conv_flag = True
             print ("  ** SCF converges in %d iterations! **" % iteration)
             break
-
-
+        do_dm = True
+        if (do_dm):
+            F, D = dm(ao_int, C, nel, scf_params)
     # post process
     if conv_flag:
         return eps, C, D, F
