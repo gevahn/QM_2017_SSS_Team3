@@ -105,7 +105,7 @@ def scf(ao_int, scf_params):
             conv_flag = True
             print ("  ** SCF converges in %d iterations! **" % iteration)
             break
-        do_dm = True
+        do_dm = False
         if (do_dm):
             F, D = dm(ao_int, C, nel, scf_params)
     # post process

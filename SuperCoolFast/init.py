@@ -49,3 +49,6 @@ def init(input_file):
 if __name__ == "__main__":
     init("test.yml")
     print(scf_params)
+
+def dipoles(scf_params, D):
+    return p4w.dipoles(scf_params, D)

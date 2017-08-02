@@ -55,3 +55,20 @@ def init(scf_params):
     nel = int(nel)
 
     return ao_ints, e_nuclear_repulsion, nel, nbf
+
+def dipoles(scf_params, D):
+    
+    basis = scf_params['basis']
+    mol_geometry = scf_params['geometry']
+    mol = psi4.geometry(mol_geometry)
+    mol.update_geometry()
+    bas = psi4.core.BasisSet.build(mol, target=basis)
+    mints = psi4.core.MintsHelper(bas)
+
+
+    dipoles = mints.ao_dipole()
+    dipole_dict = {}
+    dipole_dict['e'] = np.array([np.array(dipoles[0]),np.array(dipoles[1]),np.array(dipoles[2])])
+    dipole_dict['n'] = np.array(mol.nuclear_dipole())
+
+    return dipole_dict
