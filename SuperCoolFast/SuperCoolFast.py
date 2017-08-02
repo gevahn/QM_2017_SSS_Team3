@@ -10,11 +10,9 @@ if __name__ == "__main__":
     H = ao_ints['T'] + ao_ints['V']
     energy = np.sum((F + H) * D) + e_ZZ_repul
     print("\nFINAL SCF ENERGY: {}\n".format(energy))
-    '''
-    # mp2
-    import mp2
-    print("SCS-MP2 Correlation Energy: {}\n".format(mp2.get_mp2_energy(\
-        eps, C, ao_ints['g4'], scf_params['nel'])))
-    '''
     dipoles = dipoles(scf_params, D)
     print(response(ao_ints, F, C, dipoles['e'], dipoles['e'], scf_params))
+    if(scf_params['method'] == "MP2"):
+       import mp2
+       print("SCS-MP2 Correlation Energy: {}\n".format(mp2.get_mp2_energy(\
+           eps, C, ao_ints['g4'], scf_params['nel'])))
